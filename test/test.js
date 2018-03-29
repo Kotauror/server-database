@@ -3,6 +3,7 @@ var server = require('../lib/server');
 describe('server', function () {
   before(function () {
     server.listen(4000);
+    var storage = new Storage()
   });
 
   after(function () {
@@ -40,9 +41,17 @@ describe('/', function (done) {
 describe('sliceQuery', function () {
   it('should return split req', function (done) {
     var output = sliceQuery('set?somekey=somevalue')
-    console.log(output)
     assert.equal(output[0], 'somekey');
     assert.equal(output[1], 'somevalue');
+    done()
+  });
+});
+
+describe('saveQuery', function () {
+  it('should contain passed array', function (done) {
+    saveQuery('set?somekey=somevalue')
+    assert.equal(storage.pairs[0][0], 'somekey');
+    assert.equal(storage.pairs[0][1], 'somevalue');
     done()
   });
 });
