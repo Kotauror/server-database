@@ -37,11 +37,12 @@ describe('/', function (done) {
   });
 });
 
-describe('splitQuery', function () {
-  it('should console log url', function (done) {
-    var output = splitQuery("set?somekey=somevalue")
-    console.log(output + "**")
-    assert.equal(output, ["set?", "somekey", "somevalue"]);
+describe('saveQuery', function () {
+  it('should return split req', function (done) {
+    var output = saveQuery('set?somekey=somevalue')
+    console.log(output)
+    assert.equal(output[0], 'somekey');
+    assert.equal(output[1], 'somevalue');
     done()
   });
 });
