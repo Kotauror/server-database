@@ -49,7 +49,7 @@ describe('sliceQuery', function () {
 
 describe('saveQuery', function () {
   it('should save key&pair value in the storage', function (done) {
-    saveQuery('/set?somekey=somevalue')
+    saveQuery('/set?somekey=somevalue', {write: function() {}})
     assert.equal(storage.pairs[0][0], 'somekey');
     assert.equal(storage.pairs[0][1], 'somevalue');
     done()
@@ -58,8 +58,8 @@ describe('saveQuery', function () {
 
 describe('searchQuery', function () {
   it('should return value from given key', function (done) {
-    saveQuery('/set?somekey=somevalue')
-    var value = searchQuery('/get?key=somekey')
+    saveQuery('/set?somekey=somevalue', {write: function() {}})
+    var value = searchQuery('/get?key=somekey', {write: function() {}})
     console.log(value)
     assert.equal(value, 'somevalue');
     done()
