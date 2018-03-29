@@ -40,7 +40,7 @@ describe('/', function (done) {
 
 describe('sliceQuery', function () {
   it('should return split request string without the method', function (done) {
-    var output = sliceQuery('set?somekey=somevalue')
+    var output = sliceQuery('/set?somekey=somevalue')
     assert.equal(output[0], 'somekey');
     assert.equal(output[1], 'somevalue');
     done()
@@ -49,9 +49,19 @@ describe('sliceQuery', function () {
 
 describe('saveQuery', function () {
   it('should save key&pair value in the storage', function (done) {
-    saveQuery('set?somekey=somevalue')
+    saveQuery('/set?somekey=somevalue')
     assert.equal(storage.pairs[0][0], 'somekey');
     assert.equal(storage.pairs[0][1], 'somevalue');
+    done()
+  });
+});
+
+describe('searchQuery', function () {
+  it('should return value from given key', function (done) {
+    saveQuery('/set?somekey=somevalue')
+    var value = searchQuery('/get?key=somekey')
+    console.log(value)
+    assert.equal(value, 'somevalue');
     done()
   });
 });
