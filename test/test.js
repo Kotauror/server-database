@@ -37,9 +37,9 @@ describe('/', function (done) {
   });
 });
 
-describe('saveQuery', function () {
+describe('sliceQuery', function () {
   it('should return split req', function (done) {
-    var output = saveQuery('set?somekey=somevalue')
+    var output = sliceQuery('set?somekey=somevalue')
     console.log(output)
     assert.equal(output[0], 'somekey');
     assert.equal(output[1], 'somevalue');
