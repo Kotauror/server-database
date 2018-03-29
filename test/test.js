@@ -13,7 +13,7 @@ describe('server', function () {
 var assert = require('assert'),
     http = require('http');
 
-describe('/', function () {
+describe('/', function (done) {
   it('should return 200', function (done) {
     http.get('http://localhost:4000', function (res) {
       assert.equal(200, res.statusCode);
@@ -23,14 +23,14 @@ describe('/', function () {
 
   it('should say "Hello, world!"', function (done) {
     http.get('http://localhost:4000', function (res) {
-      var data = '';
+      var dataToCheckWith = '';
 
       res.on('data', function (chunk) {
-        data += chunk;
+        dataToCheckWith += chunk;
       });
 
       res.on('end', function () {
-        assert.equal('Hello World!\n', data);
+        assert.equal('Hello World!', dataToCheckWith);
         done();
       });
     });
